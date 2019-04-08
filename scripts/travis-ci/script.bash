@@ -23,7 +23,7 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
 		unzip ../asiosdk2.3.zip -d ../
 		mv ../ASIOSDK2.3 3rdparty/asio
 		PATH=$PATH:/usr/lib/mxe/usr/bin
-		export MUMBLE_PROTOC=/usr/lib/mxe/usr/x86_64-unknown-linux-gnu/bin/protoc
+		export MUMBLE_PROTOC=/usr/lib/mxe/usr/x86_64-pc-linux-gnu/bin/protoc
 		EXTRA_CONFIG=
 		if [ "${MUMBLE_NO_PCH}" == "1" ]; then
 			EXTRA_CONFIG="no-pch ${EXTRA_CONFIG}"
@@ -36,7 +36,7 @@ if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
 		unzip ../asiosdk2.3.zip -d ../
 		mv ../ASIOSDK2.3 3rdparty/asio
 		PATH=$PATH:/usr/lib/mxe/usr/bin
-		export MUMBLE_PROTOC=/usr/lib/mxe/usr/x86_64-unknown-linux-gnu/bin/protoc
+		export MUMBLE_PROTOC=/usr/lib/mxe/usr/x86_64-pc-linux-gnu/bin/protoc
 		EXTRA_CONFIG=
 		if [ "${MUMBLE_NO_PCH}" == "1" ]; then
 			EXTRA_CONFIG="no-pch ${EXTRA_CONFIG}"
@@ -54,6 +54,7 @@ elif [ "${TRAVIS_OS_NAME}" == "osx" ]; then
 	export MUMBLE_PREFIX=/usr/local
 	export MUMBLE_ICE_PREFIX=/usr/local/opt/ice
 	qmake CONFIG+="release tests warnings-as-errors" && make -j2 && make check
+	./macx/scripts/osxdist.py --no-compat-warning
 else
 	exit 1
 fi
